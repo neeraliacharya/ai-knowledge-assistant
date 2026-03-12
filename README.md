@@ -46,18 +46,16 @@ LLM Generates Answer
 ## Project Structure
 
 ai-knowledge-assistant
-│
-├── app
-│ ├── api
-│ ├── services
-│ ├── utils
-│ ├── prompts
-│ ├── config.py
-│ └── main.py
-│
-├── requirements.txt
-├── README.md
-└── .gitignore
+── app
+   ── api
+   ── services
+   ── utils
+   ── prompts
+   ── config.py
+   ── main.py
+── requirements.txt
+── README.md
+── .gitignore
 
 
 ---
