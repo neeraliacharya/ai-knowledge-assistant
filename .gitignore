@@ -16,7 +16,8 @@ __pycache__/
 .env
 .env.*
 .envrc
-
+imp.txt
+python_testmodels_gemini.py
 # ==============================
 # Virtual environments
 # ==============================
