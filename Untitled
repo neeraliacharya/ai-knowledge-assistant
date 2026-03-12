@@ -1,0 +1,46 @@
+# AI Knowledge Assistant
+
+Enterprise-style Retrieval-Augmented Generation (RAG) system that allows users to ask questions about documents.
+
+The system ingests PDFs, converts them into embeddings, stores them in a vector database, and retrieves relevant context to generate accurate answers.
+
+---
+
+## Features
+
+- Document ingestion (PDF)
+- Text chunking and embedding
+- Semantic search using vector similarity
+- Context-aware question answering
+- FastAPI backend API
+
+---
+
+## Tech Stack
+
+- Python
+- FastAPI
+- Sentence Transformers
+- FAISS
+- LangChain
+- Uvicorn
+
+---
+
+## Architecture
+
+User Question
+↓
+FastAPI API
+↓
+Embedding Model
+↓
+Vector Database (FAISS)
+↓
+Retrieve Relevant Context
+↓
+LLM Generates Answer
+
+---
+
+## Project Structure
