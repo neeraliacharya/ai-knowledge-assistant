@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def retrieve_chunks(query, model, index, chunks, top_k=3):
 
     query_embedding = model.encode([query])

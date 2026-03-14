@@ -1,13 +1,54 @@
 from fastapi import FastAPI
 from app.services.chunking import chunk_text
 from app.services.embedding import generate_embeddings, embedding_model
+from app.services.file_watcher import start_watcher
 from app.services.ingestion import extract_text_from_pdf
 from app.services.llm_service import ask_llm, generate_rag_answer
+from app.services.rag_pipeline import initialize_rag, vector_index, chunks_store
+from app.services.reranker import rerank_chunks
 from app.services.retrieval import retrieve_chunks
 from app.services.vector_store import create_vector_store
-
+from contextlib import asynccontextmanager
+import app.services.rag_pipeline as rag_pipeline
 
 app = FastAPI(title="AI Knowledge Assistant")
+
+observer = None
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+
+    global observer
+
+    rag_pipeline.initialize_rag()
+
+    observer = start_watcher()
+
+    yield
+
+    if observer:
+        observer.stop()
+        observer.join()
+
+
+app = FastAPI(
+    title="AI Knowledge Assistant",
+    lifespan=lifespan
+)
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+
+    rag_pipeline.initialize_rag()
+
+    global observer
+    observer = start_watcher()
+
+    yield
+
+    observer.stop()
+    observer.join()
+
 document_path = "documents/NimbusTechKnox_GTM_Strategy.pdf"
 # use /docs for all rest end point list
 
@@ -75,20 +116,46 @@ def search(question: str):
     return {"question": question, "retrieved_chunks": results}
 
 
-# rag endpoint
+@app.get("/ping")
+def ping():
+    print("Ping called")
+    return {"status": "alive"}
+
 @app.get("/ask")
 def ask(question: str):
 
-    text = extract_text_from_pdf(document_path)
+    retrieved_chunks = retrieve_chunks(
+        question,
+        embedding_model,
+        rag_pipeline.vector_index,
+        rag_pipeline.chunks_store,
+        top_k=10
+    )
 
-    chunks = chunk_text(text)
+    reranked_chunks = rerank_chunks(question, retrieved_chunks, top_k=3)
 
-    embeddings = generate_embeddings(chunks)
+    answer = generate_rag_answer(question, reranked_chunks)
 
-    index = create_vector_store(embeddings)
+    sources = list(set([c["metadata"]["source"] for c in reranked_chunks]))[:2]
 
-    retrieved_chunks = retrieve_chunks(question, embedding_model, index, chunks)
+    return {
+        "question": question,
+        "answer": answer,
+        "sources": sources
+    }
 
-    answer = generate_rag_answer(question, retrieved_chunks)
+@app.get("/debug-durgesh")
+def debug_durgesh():
 
-    return {"question": question, "answer": answer, "source_chunks": retrieved_chunks}
+    import app.services.rag_pipeline as rag_pipeline
+
+    matches = []
+
+    for chunk in rag_pipeline.chunks_store:
+        if "durgesh" in chunk["text"].lower():
+            matches.append(chunk["text"])
+
+    return {
+        "matches_found": len(matches),
+        "examples": matches[:3]
+    }

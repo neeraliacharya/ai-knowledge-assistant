@@ -1,16 +1,11 @@
-from pypdf import PdfReader
+import pdfplumber
 
-
-def extract_text_from_pdf(file_path: str):
-
-    reader = PdfReader(file_path)
+def extract_text_from_pdf(path):
 
     text = ""
 
-    for page in reader.pages:
-        extracted = page.extract_text()
-
-        if extracted:
-            text += extracted + "\n"
+    with pdfplumber.open(path) as pdf:
+        for page in pdf.pages:
+            text += page.extract_text() or ""
 
     return text

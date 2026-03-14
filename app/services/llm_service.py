@@ -6,7 +6,7 @@ client = Groq(api_key=GROQ_API_KEY)
 def ask_llm(prompt: str):
 
     response = client.chat.completions.create(
-        model="qwen/qwen3-32b",
+        model="llama-3.1-8b-instant",
         messages=[
             {"role": "user", "content": prompt}
         ]
@@ -34,7 +34,7 @@ If the answer is not in the context, say:
 """
 
     response = client.chat.completions.create(
-        model="qwen/qwen3-32b",
+        model="llama-3.1-8b-instant",
         messages=[
             {"role": "user", "content": prompt}
         ]
@@ -42,21 +42,21 @@ If the answer is not in the context, say:
 
     return response.choices[0].message.content
 
-def generate_rag_answer(question, context_chunks):
+def generate_rag_answer(question, retrieved_chunks):
 
-    context = "\n\n".join(context_chunks)
+    # Build context from retrieved chunks
+    #context = "\n\n".join([c["text"] for c in retrieved_chunks])
+    context = "\n\n".join([c["text"] for c in retrieved_chunks[:3]])
 
     prompt = f"""
 You are a helpful assistant answering questions using company documents.
 
-Answer ONLY using the provided context.
+Use ONLY the provided context to answer.
 
-Do NOT explain your reasoning.
-Do NOT include thinking steps.
+Do NOT include reasoning steps.
+Do NOT output <think> tags.
 
-Return ONLY the final answer in one short paragraph.
-
-If the answer is not present in the context, respond exactly with:
+If the answer is not present in the context, reply exactly:
 "I could not find this information in the provided documents."
 
 Context:
@@ -68,11 +68,19 @@ Question:
 Answer:
 """
 
+    # Call LLM
     response = client.chat.completions.create(
-        model="qwen/qwen3-32b",
-        messages=[
-            {"role": "user", "content": prompt}
-        ]
+        model="llama-3.1-8b-instant",
+        messages=[{"role": "user", "content": prompt}],
+        timeout=20,
+        temperature=0,
+        max_tokens=300
     )
 
-    return response.choices[0].message.content.strip()
+    response_text = response.choices[0].message.content
+
+    # Remove reasoning tokens if model emits them
+    if "<think>" in response_text:
+        response_text = response_text.split("</think>")[-1]
+
+    return response_text.strip()

@@ -1,7 +1,7 @@
 from sentence_transformers import SentenceTransformer
 
 # load embedding model once
-embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
+embedding_model = SentenceTransformer("BAAI/bge-base-en-v1.5")
 
 
 def generate_embeddings(chunks):
