@@ -34,6 +34,11 @@ def initialize_rag():
         for chunk, meta in zip(all_chunks, metadata)
     ]
 
+    if not all_chunks:
+        print("No documents found. Vector DB cleared.")
+        vector_index = None
+        return
+
     embeddings = generate_embeddings(all_chunks)
 
     vector_index = create_vector_store(embeddings)

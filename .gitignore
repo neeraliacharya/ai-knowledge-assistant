@@ -225,7 +225,27 @@ __marimo__/
 models/
 embeddings/
 vectorstore/
+vector_store/
 *.pt
 *.pth
 *.onnx
 *.ckpt
+
+# ==============================
+# Uploaded documents (sensitive)
+# ==============================
+documents/
+
+# ==============================
+# UI — Vite / React / Node
+# ==============================
+ui/node_modules/
+ui/dist/
+ui/dist-ssr/
+ui/.vite/
+ui/.env
+ui/.env.local
+ui/.env.*.local
+ui/npm-debug.log*
+ui/yarn-debug.log*
+ui/yarn-error.log*
