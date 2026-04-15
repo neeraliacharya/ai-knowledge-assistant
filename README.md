@@ -28,7 +28,7 @@ A professional-grade Retrieval-Augmented Generation (RAG) platform that transfor
 
 This project was architected and developed using state-of-the-art AI models:
 - **Claude 3.5 Sonnet**: Used for designing and building the modern React interface and frontend logic.
-- **Claude 3 Opus**: Used for architecting the core RAG logic, backend engineering, and system integration.
+- **Claude 3.5 Opus**: Used for architecting the core RAG logic, backend engineering, and system integration.
 
 ---
 
