@@ -24,6 +24,14 @@ A professional-grade Retrieval-Augmented Generation (RAG) platform that transfor
 
 ---
 
+## 🤖 Built With AI Tools
+
+This project was architected and developed using state-of-the-art AI coding assistants:
+- **Antigravity**: Used for core RAG logic, backend engineering, and system integration.
+- **Claude Codex**: Used for designing and building the modern React interface.
+
+---
+
 ## 🏗 Architecture
 
 1. **Ingestion**: Documents are uploaded $\rightarrow$ Saved to S3 $\rightarrow$ Synced locally.
