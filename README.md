@@ -24,11 +24,11 @@ A professional-grade Retrieval-Augmented Generation (RAG) platform that transfor
 
 ---
 
-## 🤖 Built With AI Tools
+## 🤖 Built With AI Models
 
-This project was architected and developed using state-of-the-art AI coding assistants:
-- **Antigravity**: Used for core RAG logic, backend engineering, and system integration.
-- **Claude Codex**: Used for designing and building the modern React interface.
+This project was architected and developed using state-of-the-art AI models:
+- **Claude 3.5 Sonnet**: Used for designing and building the modern React interface and frontend logic.
+- **Claude 3 Opus**: Used for architecting the core RAG logic, backend engineering, and system integration.
 
 ---
 
