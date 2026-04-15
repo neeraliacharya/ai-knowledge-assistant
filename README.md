@@ -18,17 +18,10 @@ A professional-grade Retrieval-Augmented Generation (RAG) platform that transfor
 ## 🛠 Tech Stack
 
 - **Large Language Model**: [Groq](https://groq.com/) (Llama-3.1-8b-instant)
+- **AI**: Claude models
 - **Backend**: Python 3.13, FastAPI, FAISS (Vector DB), Sentence Transformers
 - **Frontend**: React 18, Vite, Lucide React
 - **Infrastructure**: AWS S3, Boto3
-
----
-
-## 🤖 Built With AI Models
-
-This project was architected and developed using state-of-the-art AI models:
-- **Claude 3.5 Sonnet**: Used for designing and building the modern React interface and frontend logic.
-- **Claude 3.5 Opus**: Used for architecting the core RAG logic, backend engineering, and system integration.
 
 ---
 
