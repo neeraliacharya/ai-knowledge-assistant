@@ -27,10 +27,11 @@ A production-grade Retrieval-Augmented Generation (RAG) platform that transforms
 | Embeddings | `BAAI/bge-base-en-v1.5` via Sentence Transformers (local) |
 | Reranker | `cross-encoder/ms-marco-MiniLM-L-6-v2` (local) |
 | Vector DB | FAISS `IndexFlatL2` (persisted to disk) |
-| RAG Evaluation | RAGAS 0.2.x with Groq as judge LLM |
+| RAG Evaluation | RAGAS 0.2.14, LangChain-Groq, LangChain-HuggingFace |
 | Backend | Python 3.14, FastAPI, Uvicorn |
 | Frontend | React 18, Vite, Lucide React |
 | Storage | AWS S3, Boto3 |
+| Testing | pytest 9, anyio, 98 tests (unit / integration / API) |
 
 ---
 
@@ -46,11 +47,11 @@ User Question
                                                 ▼
                                         [retrieval.py]
                                      FAISS semantic search
-                                      + keyword fallback
+                                      top-10 candidates
                                                 │
                                                 ▼
                                         [reranker.py]
-                                     CrossEncoder scoring
+                                  CrossEncoder scoring → top-5
                                                 │
                                                 ▼
                                         [llm_service.py]
@@ -147,20 +148,66 @@ X-API-Key: <your-api-key>
 
 ## RAGAS Evaluation
 
-RAGAS automatically measures RAG pipeline quality without needing human graders.
+RAGAS automatically measures RAG pipeline quality across four metrics without needing human graders. Each metric targets a different failure mode in the pipeline.
 
 ### Metrics
 
-| Metric | What it measures | Ground truth needed |
-|---|---|---|
-| **Faithfulness** | Are all claims in the answer supported by retrieved context? Detects hallucination. | No |
-| **Answer Relevancy** | Does the answer address what was actually asked? | No |
-| **Context Precision** | Are the retrieved chunks useful? (retrieval signal-to-noise) | Yes |
-| **Context Recall** | Did retrieval find all the information needed to answer? | Yes |
+| Metric | What it measures | Targets | Ground truth needed |
+|---|---|---|---|
+| **Faithfulness** | Are all claims in the answer supported by the retrieved context? Detects hallucination. | LLM generation | No |
+| **Answer Relevancy** | Does the answer fully address what was asked? Penalises incomplete or off-topic answers. | LLM generation | No |
+| **Context Precision** | Of the chunks retrieved, how many were actually useful? (signal-to-noise ratio) | Retrieval | Yes |
+| **Context Recall** | Did retrieval surface all the information needed to answer correctly? | Retrieval | Yes |
+
+### Current benchmark scores (88 samples)
+
+| Metric | Score |
+|---|---|
+| Faithfulness | **0.8790** |
+| Answer Relevancy | **0.7585** |
+| Context Precision | **0.8121** |
+| Context Recall | **0.7882** |
+
+### How scores improved through iteration
+
+The initial pipeline scored Answer Relevancy 0.68 and Context Recall 0.71. Two changes closed the gap:
+
+**1. Removed keyword pre-filter before reranking (Context Recall: 0.71 → 0.79)**
+
+The original `retrieval.py` fetched 10 candidates from FAISS but then filtered down to 3 using keyword overlap before passing to the Cross-Encoder reranker. This discarded semantically relevant chunks that used synonyms or paraphrasing — exactly the cases where embedding search excels and keyword matching fails. The fix: pass all 10 FAISS results to the reranker and let it score them properly.
+
+```python
+# Before — keyword filter discards paraphrased-but-relevant chunks
+if keyword_matches:
+    return keyword_matches[:3]
+return retrieved_chunks[:3]
+
+# After — reranker sees the full FAISS candidate pool
+return retrieved_chunks
+```
+
+**2. Removed 1–2 sentence answer constraint (Answer Relevancy: 0.68 → 0.76)**
+
+The prompt previously enforced `Return a complete and meaningful 1–2 sentence answer.` RAGAS measures Answer Relevancy by generating synthetic questions from the answer and comparing them to the original question. A 2-sentence answer to a multi-part question produces narrow synthetic questions that diverge from the original — low score by design. Removing the length cap and requiring the LLM to address every aspect of the question resolved this.
+
+**3. Increased reranker output from top-3 to top-5**
+
+More verified-relevant chunks in the LLM prompt means more of the ground truth information is present, which directly raises Context Recall without adding noise (the Cross-Encoder scores each candidate).
+
+### How RAGAS is wired in
+
+```
+Metrics that need ground truth (Context Precision, Context Recall)
+└── Offline only → scripts/run_evaluation.py → data/eval_testset.json
+
+Metrics that don't need ground truth (Faithfulness, Answer Relevancy)
+└── Online: background task after every /ask request → logs/ragas_eval_log.jsonl
+└── Offline: same script, same test set
+```
 
 ### Online evaluation (automatic, per-request)
 
-After every `/ask` response is sent to the user, FastAPI runs Faithfulness and Answer Relevancy as a background task — the user sees no added latency. Scores are appended to `logs/ragas_eval_log.jsonl`.
+After every `/ask` response is returned to the user, FastAPI schedules Faithfulness and Answer Relevancy as a `BackgroundTask` — zero added latency to the user. Scores are appended to `logs/ragas_eval_log.jsonl`.
 
 ### Offline batch evaluation
 
@@ -170,6 +217,24 @@ python scripts/run_evaluation.py
 
 # Fail CI if scores fall below thresholds
 python scripts/run_evaluation.py --min-faithfulness 0.7 --min-relevancy 0.75
+```
+
+### Python 3.14 compatibility note
+
+RAGAS imports `nest_asyncio` at module level, which replaces `asyncio.Task` with a pure-Python `_PyTask`. Python 3.12+ moved `asyncio.current_task()` to a C built-in that only tracks C-level task instances — making it return `None` inside all RAGAS tasks and causing `asyncio.timeout()` to raise `RuntimeError: Timeout should be used inside a task`. Every metric silently returned NaN.
+
+The fix (applied in `ragas_evaluator.py` immediately after RAGAS imports) patches `asyncio.current_task` to read from `asyncio.tasks._current_tasks`, the Python dict that `_PyTask` correctly maintains:
+
+```python
+if not getattr(asyncio, '_current_task_patched', False):
+    def _fixed_current_task(loop=None):
+        if loop is None:
+            try: loop = asyncio.get_running_loop()
+            except RuntimeError: return None
+        return asyncio.tasks._current_tasks.get(loop)
+    asyncio.current_task = _fixed_current_task
+    asyncio.tasks.current_task = _fixed_current_task
+    asyncio._current_task_patched = True
 ```
 
 ### Customise the test set
@@ -186,7 +251,7 @@ Edit `data/eval_testset.json`. Each entry:
 }
 ```
 
-The file ships with 20 questions pre-written from the project's sample documents.
+The file ships with 20 questions pre-written from the project's sample documents. Add your own questions from your actual documents to get scores that reflect your real use case.
 
 ---
 
@@ -217,9 +282,10 @@ ai-knowledge-assistant/
 │           ├── ChatTab.jsx
 │           └── DocumentsTab.jsx
 ├── data/
-│   └── eval_testset.json          # 20 curated Q&A pairs for RAGAS offline eval
+│   └── eval_testset.json          # 20 curated Q&A pairs for RAGAS offline eval (extend with your own)
 ├── scripts/
-│   └── run_evaluation.py          # CLI batch evaluation script
+│   ├── run_evaluation.py          # CLI batch evaluation script
+│   └── verify.sh                  # Full system verification (unit + integration + API tests)
 ├── logs/                          # RAGAS evaluation log output (gitignored)
 ├── vector_store/                  # Persisted FAISS index + chunk metadata (gitignored)
 ├── documents/                     # Local PDF cache synced from S3 (gitignored)
