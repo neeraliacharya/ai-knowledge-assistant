@@ -30,21 +30,8 @@ def retrieve_chunks(query, embedding_model, index, chunks_store, top_k=10, filte
         if len(retrieved_chunks) >= top_k:
             break
 
-    # Step 3: keyword fallback filter
-    query_words = query.lower().split()
-
-    keyword_matches = []
-
-    for chunk in retrieved_chunks:
-
-        text = chunk["text"].lower()
-
-        if any(word in text for word in query_words):
-            keyword_matches.append(chunk)
-
-    # Step 4: prefer keyword matches if they exist
-    if keyword_matches:
-        return keyword_matches[:3]
-
-    # fallback to vector results
-    return retrieved_chunks[:3]
+    # Return the full FAISS-ranked pool — the Cross-Encoder reranker
+    # downstream is far more accurate at relevance than keyword overlap.
+    # Pre-filtering to keyword matches before reranking kills context recall
+    # for paraphrased or synonym-heavy queries.
+    return retrieved_chunks

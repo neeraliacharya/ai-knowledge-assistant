@@ -1,0 +1,154 @@
+[
+  {
+    "question": "What is Nimbus TechKnox's core service offering and technology stack?",
+    "ground_truth": "Nimbus TechKnox is a DevOps and Cloud Solutions consultancy delivering digital transformation through automation, managed services, cloud architecture, and reliability engineering. Their core tech stack includes AWS, Kubernetes, Terraform, Docker, GitHub Actions, and monitoring tools like Prometheus and Grafana.",
+    "reference_contexts": [
+      "Nimbus TechKnox is a DevOps and Cloud Solutions consultancy delivering digital transformation through automation, managed services, cloud architecture, and reliability engineering.",
+      "Core tech stack: AWS, Kubernetes, Terraform, Docker, GitHub Actions, monitoring (Prometheus/Grafana). Differentiator: Bespoke solutions — not cookie-cutter packages"
+    ]
+  },
+  {
+    "question": "What are the three phases of Nimbus TechKnox's go-to-market strategy and their timelines?",
+    "ground_truth": "Phase 1 (0–3 months) is about activating your network through personal LinkedIn outreach, referral programmes, community presence, and past client re-engagement. Phase 2 (3–6 months) focuses on thought leadership and visibility through LinkedIn content, case studies, speaking at meetups, and agency partnerships. Phase 3 (6–12 months) is scalable inbound through SEO blog content, LinkedIn ads, free tools/lead magnets, and personalised cold outreach.",
+    "reference_contexts": [
+      "The GTM is structured in 3 phases over 12 months, from relationship-first quick wins to scalable inbound. Phase 1 (0–3 Months): Activate Your Network. This is the fastest, highest-ROI phase. Network converts 5–10x faster than cold channels.",
+      "Phase 2 (3–6 Months): Thought Leadership & Visibility. Build authority so inbound enquiries start coming to YOU.",
+      "Phase 3 (6–12 Months): Scalable Inbound. 1. SEO-Optimised Blog Content. 2. LinkedIn Ads (Targeted). 3. Free Tools / Lead Magnets. 4. Strategic Cold Outreach (Personalised)"
+    ]
+  },
+  {
+    "question": "What is the referral programme offered by Nimbus TechKnox and what reward does it provide?",
+    "ground_truth": "Nimbus TechKnox runs a soft-launch referral programme where anyone who refers a company that becomes a client receives 10% of the first invoice as a thank-you reward.",
+    "reference_contexts": [
+      "Referral Programme (Soft Launch) Tell your network: 'If you refer a company that becomes a client, we give you 10% of the first invoice as a thank-you.' This turns everyone you know into a sales channel."
+    ]
+  },
+  {
+    "question": "Which client acquisition channels does Nimbus TechKnox rate as highest priority and why?",
+    "ground_truth": "Personal network/referrals and agency/tech partner referrals are both rated the highest priority (5 stars) because personal network converts very fast (2–6 weeks) at zero cost, and agency/partner referrals are also fast (4–8 weeks) at low cost with high scalability.",
+    "reference_contexts": [
+      "Channel Speed to Revenue Cost Scalability Priority. Personal Very Fast (2–6 Zero Medium ★★★★★ Network / wks) Referrals. Agency / Tech Fast (4–8 wks) Low High ★★★★★ Partner Referrals. LinkedIn Organic Medium (2–4 mo) Low High ★★★★☆ Content"
+    ]
+  },
+  {
+    "question": "What are the five ideal customer profile segments that Nimbus TechKnox targets?",
+    "ground_truth": "Nimbus TechKnox targets five ICP segments: Series A–C startups (10–100 engineers, scaling fast, with broken CI/CD and rising cloud bills), SME tech companies (50–300 employees, CTO-led, with legacy infra), digital agencies (building products for clients with infra debt and no in-house ops), SaaS companies (B2B SaaS with uptime SLAs facing Kubernetes complexity), and enterprises or Fortune 500 divisions needing project augmentation.",
+    "reference_contexts": [
+      "Ideal Customer Profile (ICP) Segment Description Pain Points Series A–C Startups 10–100 engineers, scaling fast Broken CI/CD, rising cloud bills, no DevOps hire yet SME Tech Companies 50–300 employees, CTO-led Legacy infra, slow releases, compliance gaps Digital Agencies Building products for clients Infra debt, no in-house ops SaaS Companies B2B SaaS with uptime SLAs Incident response, Kubernetes complexity Enterprises (Expansion) Fortune 500 divisions needing Slow internal IT, special project augmentation needs"
+    ]
+  },
+  {
+    "question": "What is the monthly fee in the Nimbus TechKnox service agreement and what are the payment terms?",
+    "ground_truth": "The monthly fee is INR 150,000 per resource introduced, inclusive of all applicable taxes. The client must pay all undisputed invoices within 15 days of receipt by electronic transfer.",
+    "reference_contexts": [
+      "Monthly Fees The Client shall pay the Contractor INR 150,000 per Resource introduced, inclusive of all applicable taxes.",
+      "Payment Terms Client shall pay all undisputed invoices within fifteen (15) days of receipt by electronic transfer or as otherwise agreed."
+    ]
+  },
+  {
+    "question": "Who owns the intellectual property created under the Nimbus TechKnox service agreement?",
+    "ground_truth": "All work products, deliverables, inventions, discoveries, or developments created under the agreement or by any resource introduced by the contractor are owned exclusively by the client. The contractor assigns all rights, title, and interest in such work product to the client.",
+    "reference_contexts": [
+      "Intellectual Property All work products, deliverables, inventions, discoveries, or developments (\"Work Product\") created under this Agreement or by any Resource introduced by the Contractor shall be owned exclusively by Client. Contractor hereby assigns, and shall ensure all Resources assign, all rights, title, and interest in such Work Product to Client."
+    ]
+  },
+  {
+    "question": "What is the non-solicitation clause duration in the service agreement and what does it cover?",
+    "ground_truth": "For 12 months following termination, the contractor cannot directly or indirectly solicit or engage with any client customers or clients they became aware of through the agreement. The contractor must also ensure that no introduced resource solicits, contracts, or engages directly with the client or its clients for the same 12-month period.",
+    "reference_contexts": [
+      "Non-Solicitation For a period of twelve (12) months following termination of this Agreement, Contractor shall not directly or indirectly solicit or engage with any Client customers or clients that Contractor became aware of in connection with this Agreement. Contractor further agrees to ensure that no Resource introduced to the Client will solicit, contract, or otherwise engage directly with the Client or its clients for a period of twelve (12) months following termination of this Agreement."
+    ]
+  },
+  {
+    "question": "How can the Nimbus TechKnox service agreement be terminated and what happens to outstanding payments?",
+    "ground_truth": "Either party can terminate the agreement for any reason by providing at least one month's prior written notice to the other party. Upon termination, the client must pay the contractor for all services rendered and delivered work product up to the effective date of termination.",
+    "reference_contexts": [
+      "Termination for Convenience Either party may terminate this Agreement for any reason upon providing at least one (1) month's prior written notice to the other party. Effect of Termination: Upon termination, Client shall pay Contractor for all services rendered and delivered Work Product up to the effective date of termination."
+    ]
+  },
+  {
+    "question": "What is Aditya Misra's total work experience and which companies has he worked at?",
+    "ground_truth": "Aditya Misra has 6 years of experience as a Java Backend Developer. He has worked at Goldman Sachs (as Software Engineer 2 via Epam Systems, May 2024 – July 2025), PayPal (as Software Development Engineer 2, May 2022 – April 2024), Walmart (as Software Engineer 3, Sept 2021 – April 2022), and Deutsche Bank (as Senior Analyst, July 2019 – Sept 2021).",
+    "reference_contexts": [
+      "Experience (6yrs) Goldman Sachs Bengaluru, India Software Engineer 2 Epam Systems May 2024 – July 2025",
+      "PayPal Bengaluru, India Software Development Engineer 2 (SDE2) May 2022 – April 2024",
+      "Walmart Bengaluru, India Software Engineer 3 (IN3) Sept 2021 – April 2022",
+      "Deutsche Bank Pune, India Senior Analyst July 2019 – Sept 2021"
+    ]
+  },
+  {
+    "question": "What was Aditya Misra's key achievement at PayPal?",
+    "ground_truth": "At PayPal, Aditya led development of Fraud Claims and Chargeback in CROWN (a Fraud Case Management tool), automating fraud operations and reducing manual intervention. He also optimised application performance by 15% and reduced Average Handling Time (AHT) by 20% through backend optimisations and automation of fraud investigation and prevention flow. He received the Bravo Award in November 2023 for coordinating a smooth release of a security vulnerability fix.",
+    "reference_contexts": [
+      "PayPal Bengaluru, India Software Development Engineer 2 (SDE2) May 2022 – April 2024 CROWN: Led development of Fraud Claims and Chargeback in CROWN (Fraud Case Management tool), automating fraud operations and reducing manual intervention. Optimized application performance by 15% following best practices in microservices integration and REST API development. Reduced Average Handling Time (AHT) by 20% through backend optimizations and automation of fraud investigation & prevention flow.",
+      "PayPal - Bravo Award (Nov 2023): Recognized for coordinating and ensuring a smooth release of a security vulnerability fix as part of an API upgrade."
+    ]
+  },
+  {
+    "question": "What is Neerali Acharya's current role and how many years of experience does she have?",
+    "ground_truth": "Neerali Acharya is a Senior Software Engineer at Oracle India Pvt. Ltd., where she has worked since July 2021 on the Oracle Learning Cloud (OLC) module within HCM Fusion Apps. She has 6.5+ years of total experience building and scaling enterprise SaaS products.",
+    "reference_contexts": [
+      "Neerali Acharya — Senior Software Engineer with 6.5+ years of experience building and scaling enterprise SaaS products.",
+      "Oracle India, Pvt. Ltd. | Senior Software Engineer July 2021 - Present Technologies: Java, SQL, Elasticsearch, JavaScript, REST APIs, PL/SQL, ADF Framework, Docker Product: OLC(Oracle Learning Cloud) Module - HCM Fusion Apps"
+    ]
+  },
+  {
+    "question": "What SQL optimisation work did Neerali Acharya do at Oracle?",
+    "ground_truth": "At Oracle, Neerali optimised complex SQL queries and indexing strategies, reducing execution time by approximately 30% through execution plan analysis and query refactoring. She also used PL/SQL for controlled data correction and recovery to ensure transactional integrity during production fixes.",
+    "reference_contexts": [
+      "Optimized complex SQL queries and indexing strategies, reducing execution time by ~30% through execution plan analysis and query refactoring. Used PL/SQL for controlled data correction and recovery, ensuring transactional integrity during production fixes."
+    ]
+  },
+  {
+    "question": "What domain and technology stack does Mitanshu Patel specialise in?",
+    "ground_truth": "Mitanshu Patel is a Full Stack Developer with 6 years of experience specialising in .NET Core, SQL Server, and Angular technologies. He has worked primarily in the Health Care and E-commerce domains, using Angular for frontend, .NET Core for backend, and SQL Server for database management with Microservices Architecture on Azure.",
+    "reference_contexts": [
+      "Experienced Full Stack Developer with 6 years of proficiency in .NET Core, SQL Server, and Angular technologies. Demonstrated leadership in developing and maintaining large-scale software applications, notably in Health Care and E-commerce domains.",
+      "UK Health Care Application (Senior Software Engineer, Civica, July 2023 – Present) Leveraged Angular 15 for the Frontend and .NET Core (.NET 8.0) for Backend development, implementing Microservice Architecture with Azure HTTP functions for API and Entity Framework for data management."
+    ]
+  },
+  {
+    "question": "What cloud platforms and DevOps tools does Durgesh Puri have experience with?",
+    "ground_truth": "Durgesh Puri has experience with AWS (EC2, IAM, VPC, RDS, S3, Load Balancer, Security Groups, NACL), Docker (images, containers, volumes, Dockerfile), Git and GitHub for version control, Apache2 and Nginx web servers, and Linux (Ubuntu, RHEL). He also has skills in Bash scripting, Cron Jobs, and networking tools including TCP/IP, DNS, DHCP, and routing.",
+    "reference_contexts": [
+      "Cloud Platforms: AWS (EC2, IAM, VPC, RDS, S3, LB, SG, NACL) Version Control: Git, GitHub Operating Systems: Windows, Linux (Ubuntu, RHEL) Programming: C, C++, Python (Basic) Automation & Scripting: Bash, Shell Scripting, Cron Jobs Web Servers: Apache2, Nginx, SSH, NFS Containers: Docker (images, containers, volumes, Dockerfile)"
+    ]
+  },
+  {
+    "question": "What is Rajeev Ranjan's DevOps specialisation and current employer?",
+    "ground_truth": "Rajeev Ranjan is a DevOps Engineer currently working at Cognizant Technology Solutions (in the GSA WiSE team) since January 2024 in Bengaluru. He specialises in automating and optimising deployments using GitHub Actions, Azure Kubernetes Service (AKS), Terraform, and Docker, and is proficient in Datadog for monitoring and observability.",
+    "reference_contexts": [
+      "Software Engineer with over 4 years of experience and 3+ years in DevOps, specializing in automating and optimizing deployments using GitHub Actions, Azure, Kubernetes Service, and Docker.",
+      "Software Engineer {Cognizant-GSA(WiSE)} Cognizant Technology Solution 01/2024 - Present, Bengaluru, India Design, deploy, and manage Kubernetes clusters using Azure Kubernetes Service (AKS).",
+      "Proficient in Datadog monitoring and observability solutions, ensuring seamless performance and reliability for mission-critical systems."
+    ]
+  },
+  {
+    "question": "What topics are covered in the Python basics course?",
+    "ground_truth": "The Python basics course covers syntax, variables, data types, numbers and strings, conditional statements (if, else, and elif), loops, logic and bit operations, and data structures including lists, tuples, and dictionaries. The course aims to give a solid understanding of Python through hands-on exercises and projects.",
+    "reference_contexts": [
+      "Course Objectives Syntax, variables, data types, numbers and strings Conditional Statements (else, if, and elif) Loops, logic and bit operations, lists, tuples and dictionaries Solid understanding of Python through hands-on exercises and projects"
+    ]
+  },
+  {
+    "question": "What is the governing law and jurisdiction for disputes in the service agreement?",
+    "ground_truth": "The service agreement is governed by and construed in accordance with the laws of India. The courts of Ahmedabad, Gujarat have exclusive jurisdiction to resolve any disputes arising out of the agreement.",
+    "reference_contexts": [
+      "Governing Law & Jurisdiction This Agreement shall be governed by and construed in accordance with the laws of India. The courts of Ahmedabad, Gujarat shall have exclusive jurisdiction to resolve any disputes arising out of this Agreement."
+    ]
+  },
+  {
+    "question": "What is the LinkedIn advertising budget recommended in the Nimbus TechKnox GTM strategy?",
+    "ground_truth": "The GTM strategy recommends a LinkedIn Ads budget of ₹15,000 to ₹30,000 per month. The ads should retarget website visitors and target CTOs and VP Engineering at companies with 10 to 200 employees, using case study content as ads rather than generic service advertisements.",
+    "reference_contexts": [
+      "LinkedIn Ads (Targeted) Retarget website visitors + target CTOs/VP Engineering at companies with 10–200 employees. Budget: ₹15,000–₹30,000/month. Use case study content as ads, not generic service ads."
+    ]
+  },
+  {
+    "question": "What liability cap is defined in the service agreement?",
+    "ground_truth": "The total liability of either party is capped at the total fees paid under the agreement in the three months preceding the event giving rise to the claim. Neither party is liable to the other for any indirect, incidental, or consequential damages.",
+    "reference_contexts": [
+      "Neither party shall be liable to the other for any indirect, incidental, or consequential damages. The total liability of either party shall not exceed the total fees paid under this Agreement in the three (3) months preceding the event giving rise to the claim."
+    ]
+  }
+]

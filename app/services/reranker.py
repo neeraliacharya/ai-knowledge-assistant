@@ -3,7 +3,7 @@ from sentence_transformers import CrossEncoder
 reranker_model = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
 
 
-def rerank_chunks(query, chunks, top_k=3):
+def rerank_chunks(query, chunks, top_k=5):
 
     pairs = [(query, chunk["text"]) for chunk in chunks]
 

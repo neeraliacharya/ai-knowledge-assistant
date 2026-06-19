@@ -14,9 +14,10 @@ __pycache__/
 # Environment variables / secrets
 # ==============================
 .env
-.env.*
+.env.local
+.env.*.local
 .envrc
-test_scripts/
+# .env.example is intentionally NOT ignored — it's a safe template
 # ==============================
 # Virtual environments
 # ==============================
@@ -87,6 +88,7 @@ cover/
 # Logs
 # ==============================
 *.log
+logs/
 
 # ==============================
 # Django
@@ -232,8 +234,17 @@ vector_store/
 *.ckpt
 
 # ==============================
+# Test scripts (local dev only)
+# ==============================
+test_scripts/
+
+# ==============================
 # Uploaded documents (sensitive)
 # ==============================
+# Prevents NEW documents from being tracked.
+# To also untrack documents already committed, run:
+#   git rm --cached documents/*
+#   git commit -m "chore: untrack sensitive documents"
 documents/
 
 # ==============================

@@ -1,5 +1,18 @@
 boto3>=1.34.0
 annotated-doc==0.0.4
+
+# ── RAGAS evaluation stack ─────────────────────────────────────────────────────
+# NOTE: ragas 0.4.x has a broken import of langchain_community.chat_models.vertexai.
+# Pin to 0.2.14 which is stable with our langchain versions.
+ragas==0.2.14
+langchain-groq>=0.3.0
+langchain-huggingface>=0.1.0
+datasets>=3.0.0
+
+# ── Missing from original (needed by running code) ─────────────────────────────
+groq>=0.13.0
+pdfplumber>=0.11.0
+python-multipart>=0.0.9
 annotated-types==0.7.0
 anyio==4.12.1
 certifi==2026.2.25
